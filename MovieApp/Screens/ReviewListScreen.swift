@@ -9,18 +9,20 @@ import SwiftUI
 
 struct ReviewListScreen: View {
     
-    @State private var isPresented: Bool = false
+    let movie: MovieViewModel
     
+    @State private var isPresented: Bool = false
+    @StateObject private var reviewListVM = ReviewListViewModel()
     var body: some View {
         VStack {
-            List(0...20, id: \.self) { index in
+            List(reviewListVM.reviews, id: \.reviewId) { review in
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("Review \(index)")
-                        
+                        Text(review.title)
+                        Text(review.content)
                     }
-                    Spacer() 
-                    Text("Review Published Date")
+                    Spacer()
+                    Text(review.date?.asFormattedString() ?? "")
                 }
             }
         }
@@ -29,18 +31,19 @@ struct ReviewListScreen: View {
              isPresented = true
         })
         .sheet(isPresented: $isPresented, onDismiss: {
-            
+            reviewListVM.getReviewByIds(vm: movie)
         }, content: {
-            
+            AddReviewScreen(movie: movie)
         })
         .onAppear(perform: {
-            
+            reviewListVM.getReviewByIds(vm: movie)
         })
     }
 }
 
 struct ReviewListScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ReviewListScreen().embedInNavigationView()
+        let movie = MovieViewModel(movie: Movie(context: CoreDataManager.shared.viewContext))
+        ReviewListScreen(movie: movie).embedInNavigationView()
     }
 }

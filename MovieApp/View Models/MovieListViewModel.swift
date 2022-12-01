@@ -20,7 +20,6 @@ class MovieListViewModel: ObservableObject {
     }
     
     func getAllMovies() {
-        
         let movies = CoreDataManager.shared.getAllMovies()
         DispatchQueue.main.async {
             self.movies = movies.map(MovieViewModel.init)
