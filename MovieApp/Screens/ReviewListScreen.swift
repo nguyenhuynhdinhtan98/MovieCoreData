@@ -31,7 +31,7 @@ struct ReviewListScreen: View {
              isPresented = true
         })
         .sheet(isPresented: $isPresented, onDismiss: {
-            reviewListVM.getReviewByIds(vm: movie)
+            reviewListVM.getReviewByIds(vm: movie) 
         }, content: {
             AddReviewScreen(movie: movie)
         })
