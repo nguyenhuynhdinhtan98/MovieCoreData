@@ -24,6 +24,7 @@
 		8DCCEBFC25E9765000F0B0F3 /* AddMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCCEBFB25E9765000F0B0F3 /* AddMovieViewModel.swift */; };
 		8DCCEBFF25E9C58B00F0B0F3 /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCCEBFE25E9C58B00F0B0F3 /* MovieListViewModel.swift */; };
 		C27B5167293B477600A36A48 /* Review+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27B5166293B477600A36A48 /* Review+Extensions.swift */; };
+		C2C22AF8294179B7003140CA /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C22AF7294179B7003140CA /* BaseModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		8DCCEBFB25E9765000F0B0F3 /* AddMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieViewModel.swift; sourceTree = "<group>"; };
 		8DCCEBFE25E9C58B00F0B0F3 /* MovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
 		C27B5166293B477600A36A48 /* Review+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Review+Extensions.swift"; sourceTree = "<group>"; };
+		C2C22AF7294179B7003140CA /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 		C27B5165293B475F00A36A48 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C2C22AF7294179B7003140CA /* BaseModel.swift */,
 				C27B5166293B477600A36A48 /* Review+Extensions.swift */,
 			);
 			path = Model;
@@ -231,6 +234,7 @@
 				8D5C25E225E72CD4002BAF40 /* Date+Extensions.swift in Sources */,
 				8D0926D525E5AE9C00502FF8 /* CoreDataManager.swift in Sources */,
 				8D5C25C825E6F3D8002BAF40 /* View+Extensions.swift in Sources */,
+				C2C22AF8294179B7003140CA /* BaseModel.swift in Sources */,
 				8DCCEBF925E8B28900F0B0F3 /* MovieAppModel.xcdatamodeld in Sources */,
 				C27B5167293B477600A36A48 /* Review+Extensions.swift in Sources */,
 				8D5C25DF25E72747002BAF40 /* MovieListScreen.swift in Sources */,
