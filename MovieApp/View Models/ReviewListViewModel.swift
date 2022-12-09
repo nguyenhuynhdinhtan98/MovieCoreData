@@ -23,7 +23,6 @@ class ReviewListViewModel: ObservableObject {
             self.reviews = Review.getReviewsByMovieId(movieId: vm.id).map(ReviewViewModel.init)
         }
     }
-    
 }
 
 struct ReviewViewModel {

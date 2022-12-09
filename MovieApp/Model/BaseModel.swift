@@ -11,24 +11,29 @@ import CoreData
 protocol BaseModel: NSManagedObject {
     func save()
     func delete()
-    static func byID<T: NSManagedObjectID>(id: NSManagedObjectID) -> T
-    static func getAll<T: NSManagedObject>() -> [T]
+    func byID<T: NSManagedObjectID>(id: NSManagedObjectID) -> T?
+    func getAll<T: NSManagedObject>() -> [T]
 }
 
 extension BaseModel {
+    
+    static var viewContext: NSManagedObjectContext {
+        return CoreDataManager.shared.viewContext
+    }
+    
     func save() {
         CoreDataManager.shared.save()
     }
     
     func delete() {
-        CoreDataManager.shared.viewContext.delete(self)
+        Self.viewContext.delete(self)
         save()
     }
     
-    static func getAll<T>() -> [T] where T: NSManagedObject {
+   static func getAll<T>() -> [T] where T: NSManagedObject {
         let fetchRequest: NSFetchRequest<T> = NSFetchRequest(entityName: String(describing: T.self))
         do {
-            return try CoreDataManager.shared.viewContext.fetch(fetchRequest)
+            return try viewContext.fetch(fetchRequest)
         } catch {
             return []
         }
@@ -36,8 +41,9 @@ extension BaseModel {
     
     static func byId<T>(id: NSManagedObjectID) -> T? where T: NSManagedObject {
         do {
-            return try CoreDataManager.shared.viewContext.existingObject(with: id) as? T
+            return try viewContext.existingObject(with: id) as? T
         } catch {
+            print(error)
             return nil
         }
     }

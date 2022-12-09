@@ -25,6 +25,7 @@
 		8DCCEBFF25E9C58B00F0B0F3 /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCCEBFE25E9C58B00F0B0F3 /* MovieListViewModel.swift */; };
 		C27B5167293B477600A36A48 /* Review+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27B5166293B477600A36A48 /* Review+Extensions.swift */; };
 		C2C22AF8294179B7003140CA /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C22AF7294179B7003140CA /* BaseModel.swift */; };
+		C2C22AFA2942D9D0003140CA /* Movie+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C22AF92942D9D0003140CA /* Movie+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		8DCCEBFE25E9C58B00F0B0F3 /* MovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
 		C27B5166293B477600A36A48 /* Review+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Review+Extensions.swift"; sourceTree = "<group>"; };
 		C2C22AF7294179B7003140CA /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		C2C22AF92942D9D0003140CA /* Movie+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 			children = (
 				C2C22AF7294179B7003140CA /* BaseModel.swift */,
 				C27B5166293B477600A36A48 /* Review+Extensions.swift */,
+				C2C22AF92942D9D0003140CA /* Movie+Extensions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				8DCCEBFC25E9765000F0B0F3 /* AddMovieViewModel.swift in Sources */,
 				8D919E3B25EED5030029DEFB /* ReviewListViewModel.swift in Sources */,
 				8D5C25E225E72CD4002BAF40 /* Date+Extensions.swift in Sources */,
+				C2C22AFA2942D9D0003140CA /* Movie+Extensions.swift in Sources */,
 				8D0926D525E5AE9C00502FF8 /* CoreDataManager.swift in Sources */,
 				8D5C25C825E6F3D8002BAF40 /* View+Extensions.swift in Sources */,
 				C2C22AF8294179B7003140CA /* BaseModel.swift in Sources */,
@@ -301,7 +305,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -356,7 +360,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
