@@ -15,7 +15,6 @@ class AddMovieViewModel: ObservableObject {
     var releaseDate: Date = Date()
     
     func save() {
-        
         let context = Movie.viewContext
         let movie = Movie(context: context)
         movie.title = title
