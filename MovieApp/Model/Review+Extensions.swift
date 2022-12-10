@@ -10,9 +10,11 @@ import CoreData
 import SwiftUI
 
 extension Review: BaseModel {
-    static func byID<T>(id: NSManagedObjectID) -> T? where T : NSManagedObjectID {
+    
+    static func byID<T>(id: NSManagedObjectID) -> T? where T : NSManagedObject {
         return nil
     }
+
     
     static func getReviewsByMovieId(movieId: NSManagedObjectID) -> [Review] {
         let request: NSFetchRequest<Review> = Review.fetchRequest()

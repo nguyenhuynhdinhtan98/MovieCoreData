@@ -9,9 +9,7 @@ import Foundation
 import CoreData
 
 extension Movie: BaseModel {
-    static func byID<T>(id: NSManagedObjectID) -> T? where T : NSManagedObjectID {
+    static func byID<T>(id: NSManagedObjectID) -> T? where T : NSManagedObject {
         return nil
     }
-    
-    
 }

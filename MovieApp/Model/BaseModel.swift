@@ -11,8 +11,8 @@ import CoreData
 protocol BaseModel: NSManagedObject {
     func save()
     func delete()
-    func byID<T: NSManagedObjectID>(id: NSManagedObjectID) -> T?
-    func getAll<T: NSManagedObject>() -> [T]
+    static func getAll<T: NSManagedObject>() -> [T]
+    static func byID<T: NSManagedObject>(id: NSManagedObjectID) -> T?
 }
 
 extension BaseModel {
