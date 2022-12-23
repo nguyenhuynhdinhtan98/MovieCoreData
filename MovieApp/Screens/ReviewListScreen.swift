@@ -43,7 +43,7 @@ struct ReviewListScreen: View {
 
 struct ReviewListScreen_Previews: PreviewProvider {
     static var previews: some View {
-        let movie = MovieViewModel(movie: Movie(context: CoreDataManager.shared.viewContext))
+        let movie = MovieViewModel(movie: Movie(context: Movie.viewContext))
         ReviewListScreen(movie: movie).embedInNavigationView()
     }
 }

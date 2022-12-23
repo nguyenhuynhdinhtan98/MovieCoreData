@@ -9,8 +9,8 @@ import Foundation
 import CoreData
 
 protocol BaseModel: NSManagedObject {
-    func save()
-    func delete()
+    func save() throws
+    func delete() throws
     static func getAll<T: NSManagedObject>() -> [T]
     static func byID<T: NSManagedObject>(id: NSManagedObjectID) -> T?
 }
@@ -34,7 +34,7 @@ extension BaseModel {
     func delete() {
         do {
             Self.viewContext.delete(self)
-            save()
+            try save()
         } catch {
             Self.viewContext.rollback()
         }
