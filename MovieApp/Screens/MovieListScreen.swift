@@ -7,11 +7,24 @@
 
 import SwiftUI
 
+
+enum Sheets: Identifiable {
+    
+    var id: UUID {
+        return UUID()
+    }
+    
+    case addMovie
+    case showFilters
+}
+
 struct MovieListScreen: View {
     
     @StateObject private var movieListVM = MovieListViewModel()
     @State private var isPresented: Bool = false
-    
+    @State private var activeSheet: Sheets?
+   
+     
     private func deleteMovie(at indexSet: IndexSet) {
         indexSet.forEach { index in
             let movie = movieListVM.movies[index]
@@ -23,30 +36,54 @@ struct MovieListScreen: View {
     }
     
     var body: some View {
-        List {
+        VStack {
+            HStack {
+                Button("Reset") {
+                    movieListVM.getAllMovies()
+                }.padding()
+                Spacer()
+                Button("Filter") {
+                    activeSheet = .showFilters
+                }
+            }.padding(.trailing, 40)
             
-            ForEach(movieListVM.movies, id: \.id) { movie in
-                NavigationLink(destination: MovieDetailScreen(movie: movie), label: {
-                    MovieCell(movie: movie)
-                })
-             
-            }.onDelete(perform: deleteMovie)
+            List {
+                
+                ForEach(movieListVM.movies, id: \.id) { movie in
+                    NavigationLink(
+                        destination: MovieDetailScreen(movie: movie),
+                        label: {
+                            MovieCell(movie: movie)
+                        })
+                }.onDelete(perform: deleteMovie)
+                
+            }.listStyle(PlainListStyle())
             
-        }.listStyle(PlainListStyle())
-        .navigationTitle("Movies")
-        .navigationBarItems(trailing: Button("Add Movie") {
-            isPresented = true 
+            .navigationTitle("Movies")
+            .navigationBarItems(trailing: Button("Add Movie") {
+                activeSheet = .addMovie
+            })
+            .sheet(item: $activeSheet, onDismiss: {
+                switch activeSheet {
+                    case .addMovie:
+                        movieListVM.getAllMovies()
+                    case .none, .showFilters:
+                        break
+                }
+            }, content: { item in
+                switch item {
+                    case .addMovie:
+                        AddMovieScreen()
+                    case .showFilters:
+                    ShowFiltersScreen(movies: $movieListVM.movies)
+                }
+            })
+            .onAppear(perform: {
+                UITableView.appearance().separatorStyle = .none
+                UITableView.appearance().separatorColor = .clear
+                movieListVM.getAllMovies()
         })
-        .sheet(isPresented: $isPresented, onDismiss: {
-            movieListVM.getAllMovies()
-        },  content: {
-            AddMovieScreen()
-        })
-        .embedInNavigationView()
-        
-        .onAppear(perform: {
-            movieListVM.getAllMovies()
-        })
+        }.embedInNavigationView()
     }
 }
 

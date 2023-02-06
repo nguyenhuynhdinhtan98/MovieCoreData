@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0E9A1B1529909FF000CF459F /* ShowFiltersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A1B1329909FF000CF459F /* ShowFiltersScreen.swift */; };
 		0E9A1B1629909FF000CF459F /* ActorDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A1B1429909FF000CF459F /* ActorDetailsScreen.swift */; };
+		0E9A1B182990CA4300CF459F /* FiltersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A1B172990CA4300CF459F /* FiltersViewModel.swift */; };
+		0E9A1B1A2990D0AF00CF459F /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A1B192990D0AF00CF459F /* String+Extensions.swift */; };
 		8D0926C125E59B3B00502FF8 /* MovieAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0926C025E59B3B00502FF8 /* MovieAppApp.swift */; };
 		8D0926C525E59B3C00502FF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D0926C425E59B3C00502FF8 /* Assets.xcassets */; };
 		8D0926C825E59B3C00502FF8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D0926C725E59B3C00502FF8 /* Preview Assets.xcassets */; };
@@ -40,6 +42,8 @@
 /* Begin PBXFileReference section */
 		0E9A1B1329909FF000CF459F /* ShowFiltersScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowFiltersScreen.swift; sourceTree = "<group>"; };
 		0E9A1B1429909FF000CF459F /* ActorDetailsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActorDetailsScreen.swift; sourceTree = "<group>"; };
+		0E9A1B172990CA4300CF459F /* FiltersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewModel.swift; sourceTree = "<group>"; };
+		0E9A1B192990D0AF00CF459F /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		8D0926BD25E59B3B00502FF8 /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0926C025E59B3B00502FF8 /* MovieAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAppApp.swift; sourceTree = "<group>"; };
 		8D0926C425E59B3C00502FF8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 				8D919E3A25EED5030029DEFB /* ReviewListViewModel.swift */,
 				C20F958F2954379A00B70C75 /* AddActorViewModel.swift */,
 				C2EBFE90295578E1008717B2 /* ActorListViewModel.swift */,
+				0E9A1B172990CA4300CF459F /* FiltersViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -165,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				8D5C25C725E6F3D8002BAF40 /* View+Extensions.swift */,
+				0E9A1B192990D0AF00CF459F /* String+Extensions.swift */,
 				8D5C25E125E72CD4002BAF40 /* Date+Extensions.swift */,
 			);
 			path = Extensions;
@@ -267,6 +273,7 @@
 				8D5C25E225E72CD4002BAF40 /* Date+Extensions.swift in Sources */,
 				C2FFAB1329559444001B976D /* ActorDetailScreen.swift in Sources */,
 				C2C22AFA2942D9D0003140CA /* Movie+Extensions.swift in Sources */,
+				0E9A1B1A2990D0AF00CF459F /* String+Extensions.swift in Sources */,
 				C2FF657929555BAB00E3A708 /* Actor+Extensions.swift in Sources */,
 				8D0926D525E5AE9C00502FF8 /* CoreDataManager.swift in Sources */,
 				C20F95902954379A00B70C75 /* AddActorViewModel.swift in Sources */,
@@ -275,6 +282,7 @@
 				0E9A1B1529909FF000CF459F /* ShowFiltersScreen.swift in Sources */,
 				C2FF657D2955605E00E3A708 /* AddActorScreen.swift in Sources */,
 				8DCCEBF925E8B28900F0B0F3 /* MovieAppModel.xcdatamodeld in Sources */,
+				0E9A1B182990CA4300CF459F /* FiltersViewModel.swift in Sources */,
 				C27B5167293B477600A36A48 /* Review+Extensions.swift in Sources */,
 				8D5C25DF25E72747002BAF40 /* MovieListScreen.swift in Sources */,
 				8D919E1625EE9E5C0029DEFB /* AddReviewScreen.swift in Sources */,

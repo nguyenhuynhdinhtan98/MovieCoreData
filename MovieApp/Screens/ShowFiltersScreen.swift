@@ -15,8 +15,10 @@ struct ShowFiltersScreen: View {
     @State private var minimumRating: String = ""
     @State private var movieTitle: String = ""
     @State private var actorName: String = ""
+    @Binding var movies: [MovieViewModel]
     
     @Environment(\.presentationMode) var presentationMode
+    @StateObject var filtersVM: FiltersViewModel = FiltersViewModel()
     
     var body: some View {
         Form {
@@ -26,9 +28,10 @@ struct ShowFiltersScreen: View {
                 HStack {
                     Spacer()
                     Button("Search") {
-                        
-                       
-                        
+                        if let date = releaseDate.asDate() {
+                           movies =  filtersVM.filtersMovieByReleaseDate(releaseDate: date)
+                        }
+                        presentationMode.wrappedValue.dismiss()
                     }.buttonStyle(PlainButtonStyle())
                     Spacer()
                 }
@@ -93,8 +96,8 @@ struct ShowFiltersScreen: View {
     }
 }
 
-struct ShowFiltersScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        ShowFiltersScreen()
-    }
-}
+//struct ShowFiltersScreen_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ShowFiltersScreen(movies: [])
+//    }
+//}
