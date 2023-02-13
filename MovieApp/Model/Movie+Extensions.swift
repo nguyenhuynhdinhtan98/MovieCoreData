@@ -9,6 +9,35 @@ import Foundation
 import CoreData
 
 extension Movie: BaseModel {
+    static func byReleaseDateMinimumRating(lower: Date?, upper: Date?, minimumRating: Int?) -> [Movie] {
+        var nsPredicate : [NSPredicate] = []
+        if let lower = lower , let upper = upper {
+            let dateRangePredicate = NSPredicate(format: "%K >= %@ AND %K <= %@",#keyPath(Movie.releaseDate) , lower as NSDate,#keyPath(Movie.releaseDate) , upper as NSDate)
+            nsPredicate.append(dateRangePredicate)
+        } else if let minimum = minimumRating {
+            let minimumRatingPredicate =  NSPredicate(format: "%K >= %i ",#keyPath(Movie.rating) , minimum)
+            nsPredicate.append(minimumRatingPredicate)
+        }
+        let request: NSFetchRequest<Movie> = Movie.fetchRequest()
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: nsPredicate)
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
+    
+    static func byReleaseDateRange(lower: Date , upper: Date) -> [Movie] {
+        let request: NSFetchRequest<Movie> = Movie.fetchRequest()
+        request.predicate = NSPredicate(format: "%K >= %@ AND %K <= %@",#keyPath(Movie.releaseDate) , lower as NSDate,#keyPath(Movie.releaseDate) , upper as NSDate)
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
     
     static func byReleaseDate(releaseDate: Date) ->  [Movie] {
         let request: NSFetchRequest<Movie> = Movie.fetchRequest()

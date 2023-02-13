@@ -13,6 +13,8 @@ struct ReviewListScreen: View {
     
     @State private var isPresented: Bool = false
     @StateObject private var reviewListVM = ReviewListViewModel()
+    @State private var filterApplied: Bool = false
+    
     var body: some View {
         VStack {
             List(reviewListVM.reviews, id: \.reviewId) { review in
@@ -31,7 +33,9 @@ struct ReviewListScreen: View {
              isPresented = true
         })
         .sheet(isPresented: $isPresented, onDismiss: {
-            reviewListVM.getReviewByIds(vm: movie) 
+            if !filterApplied {
+                reviewListVM.getReviewByIds(vm: movie)
+            }
         }, content: {
             AddReviewScreen(movie: movie)
         })

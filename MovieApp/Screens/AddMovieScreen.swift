@@ -27,6 +27,7 @@ struct AddMovieScreen: View {
                 Spacer()
                 Button("Save") {
                     addMovieVM.save()
+                    
                     presentationMode.wrappedValue.dismiss()
                 }
                 Spacer()

@@ -43,8 +43,10 @@ struct ShowFiltersScreen: View {
                 HStack {
                     Spacer()
                     Button("Search") {
-                        
-                       
+                        if let lower = startDate.asDate() , let upper = endDate.asDate() {
+                            movies = filtersVM.filterMovieByReleaseDateRange(lower: lower, upper: upper)
+                        }
+                        presentationMode.wrappedValue.dismiss()
                     }.buttonStyle(PlainButtonStyle())
                     Spacer()
                 }
@@ -57,8 +59,11 @@ struct ShowFiltersScreen: View {
                 HStack {
                     Spacer()
                     Button("Search") {
-                        
-                       
+                        let lowerBound = startDate.asDate()
+                        let upperBound = endDate.asDate()
+                        let minimum = Int(minimumRating)
+                        movies = filtersVM.filterbByReleaseDateMinimumRating(lower: lowerBound, upper: upperBound, minimumRating: minimum)
+                        presentationMode.wrappedValue.dismiss()
                     }.buttonStyle(PlainButtonStyle())
                     Spacer()
                 }
