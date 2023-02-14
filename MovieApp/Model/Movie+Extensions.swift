@@ -9,6 +9,16 @@ import Foundation
 import CoreData
 
 extension Movie: BaseModel {
+    static func byActorTitleByMovie (title: String) -> [Movie] {
+        let request: NSFetchRequest<Movie> = Movie.fetchRequest()
+        request.predicate = NSPredicate(format: "%K.%K CONTAINS %@",#keyPath(Movie.actors),#keyPath(Actor.name) ,title)
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
     
     static func byMovieTitle(title: String) -> [Movie] {
         let request: NSFetchRequest<Movie> = Movie.fetchRequest()

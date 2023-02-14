@@ -86,9 +86,8 @@ struct ShowFiltersScreen: View {
                 HStack {
                     Spacer()
                     Button("Search") {
-                        
-                       
-                        
+                        movies = filtersVM.filterActorTitleByMovie(title: actorName)
+                        presentationMode.wrappedValue.dismiss()
                     }.buttonStyle(PlainButtonStyle())
                     Spacer()
                 }

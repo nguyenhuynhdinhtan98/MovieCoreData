@@ -37,50 +37,48 @@ struct MovieListScreen: View {
     }
     
     var body: some View {
-        VStack {
-            HStack {
-                Button("Reset") {
-                    movieListVM.getAllMovies()
+        NavigationView {
+            VStack {
+                HStack {
+                    Button("Reset") {
+                        movieListVM.getAllMovies()
+                    }
+                    Spacer()
+                    Button("Filter") {
+                        filterApplied = true
+                        activeSheet = .showFilters
+                    }
                 }.padding()
-                Spacer()
-                Button("Filter") {
-                    filterApplied = true
-                    activeSheet = .showFilters
+                List {
+                    ForEach(movieListVM.movies, id: \.id) { movie in
+                        NavigationLink(
+                            destination: MovieDetailScreen(movie: movie),
+                            label: {
+                                MovieCell(movie: movie)
+                            })
+                    }.onDelete(perform: deleteMovie)
                 }
-            }
-            List {
-                ForEach(movieListVM.movies, id: \.id) { movie in
-                    NavigationLink(
-                        destination: MovieDetailScreen(movie: movie),
-                        label: {
-                            MovieCell(movie: movie)
-                        })
-                }.onDelete(perform: deleteMovie)
-                
-            }.listStyle(PlainListStyle())
-            
-            .navigationTitle("Movies")
-            .navigationBarItems(trailing: Button("Add Movie") {
-                activeSheet = .addMovie
-            })
-            .sheet(item: $activeSheet, onDismiss: {
-                if !filterApplied {
-                    movieListVM.getAllMovies()
-                }
-            }, content: { item in
-                switch item {
+                .navigationBarItems(trailing: Button("Add Movie") {
+                    activeSheet = .addMovie
+                })
+                .sheet(item: $activeSheet, onDismiss: {
+                    if !filterApplied {
+                        movieListVM.getAllMovies()
+                    }
+                }, content: { item in
+                    switch item {
                     case .addMovie:
                         AddMovieScreen()
                     case .showFilters:
-                    ShowFiltersScreen(movies: $movieListVM.movies)
-                }
-            })
-            .onAppear(perform: {
-                UITableView.appearance().separatorStyle = .none
-                UITableView.appearance().separatorColor = .clear
-                movieListVM.getAllMovies()
-        })
-        }.embedInNavigationView()
+                        ShowFiltersScreen(movies: $movieListVM.movies)
+                    }
+                })
+                .onAppear(perform: {
+                    UITableView.appearance().showsVerticalScrollIndicator = false
+                    movieListVM.getAllMovies()
+                })
+            }.navigationBarHidden(true)
+        }
     }
 }
 
