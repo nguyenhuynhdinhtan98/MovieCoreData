@@ -9,6 +9,18 @@ import Foundation
 import CoreData
 
 extension Movie: BaseModel {
+    
+    static func byMovieTitle(title: String) -> [Movie] {
+        let request: NSFetchRequest<Movie> = Movie.fetchRequest()
+        request.predicate = NSPredicate(format: "%K BEGINSWITH[cd] %@",#keyPath(Movie.title) ,title)
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
+    
     static func byReleaseDateMinimumRating(lower: Date?, upper: Date?, minimumRating: Int?) -> [Movie] {
         var nsPredicate : [NSPredicate] = []
         if let lower = lower , let upper = upper {

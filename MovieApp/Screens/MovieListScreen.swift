@@ -23,7 +23,8 @@ struct MovieListScreen: View {
     @StateObject private var movieListVM = MovieListViewModel()
     @State private var isPresented: Bool = false
     @State private var activeSheet: Sheets?
-   
+    @State private var filterApplied: Bool = false
+    
      
     private func deleteMovie(at indexSet: IndexSet) {
         indexSet.forEach { index in
@@ -43,12 +44,11 @@ struct MovieListScreen: View {
                 }.padding()
                 Spacer()
                 Button("Filter") {
+                    filterApplied = true
                     activeSheet = .showFilters
                 }
-            }.padding(.trailing, 40)
-            
+            }
             List {
-                
                 ForEach(movieListVM.movies, id: \.id) { movie in
                     NavigationLink(
                         destination: MovieDetailScreen(movie: movie),
@@ -64,11 +64,8 @@ struct MovieListScreen: View {
                 activeSheet = .addMovie
             })
             .sheet(item: $activeSheet, onDismiss: {
-                switch activeSheet {
-                    case .addMovie:
-                        movieListVM.getAllMovies()
-                    case .none, .showFilters:
-                        break
+                if !filterApplied {
+                    movieListVM.getAllMovies()
                 }
             }, content: { item in
                 switch item {
