@@ -42,13 +42,21 @@ struct MovieListScreen: View {
                 HStack {
                     Button("Reset") {
                         movieListVM.getAllMovies()
-                    }
+                    }.padding().foregroundColor(Color(#colorLiteral(red: 0.202427417, green: 0.5955722928, blue: 0.8584871888, alpha: 1)))
+                    Button("Sort") {
+                        
+                    }.foregroundColor(Color(#colorLiteral(red: 0.202427417, green: 0.5955722928, blue: 0.8584871888, alpha: 1)))
                     Spacer()
-                    Button("Filter") {
-                        filterApplied = true
-                        activeSheet = .showFilters
+                    VStack(spacing: 10) {
+                        Button("Filter") {
+                            filterApplied = true
+                            movieListVM.filterEnabled = true
+                            activeSheet = .showFilters
+                        }.foregroundColor(Color(#colorLiteral(red: 0.202427417, green: 0.5955722928, blue: 0.8584871888, alpha: 1)))
                     }
-                }.padding()
+                }.padding(.trailing, 40)
+                    
+                    .foregroundColor(.white)
                 List {
                     ForEach(movieListVM.movies, id: \.id) { movie in
                         NavigationLink(
@@ -77,7 +85,32 @@ struct MovieListScreen: View {
                     UITableView.appearance().showsVerticalScrollIndicator = false
                     movieListVM.getAllMovies()
                 })
-            }.navigationBarHidden(true)
+                GeometryReader { geometry in
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Picker("Select title", selection: $movieListVM.selectedSortOption) {
+                                ForEach(SortOptions.allCases, id: \.self) {
+                                    Text($0.displayText)
+                                }
+                            }.frame(width: geometry.size.width/3, height: 100)
+                                .clipped()
+                            
+                            Picker("Sort Direction", selection: $movieListVM.selectedSortDirection) {
+                                ForEach(SortDirection.allCases, id: \.self) {
+                                    Text($0.displayText)
+                                }
+                            }.frame(width: geometry.size.width/3, height: 100)
+                                .clipped()
+                            
+                            Spacer()
+                        }
+                        Button("Done") {
+                            
+                        }
+                    }
+                }
+            }
         }
     }
 }

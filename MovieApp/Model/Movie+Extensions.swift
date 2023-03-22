@@ -81,6 +81,16 @@ extension Movie: BaseModel {
             print(error)
             return []
         }
-        
+    }
+    
+    static func filterMoviesByMinimumReviewCount(rating: Int = 1) -> [Movie] {
+        let request: NSFetchRequest<Movie> = Movie.fetchRequest()
+        request.predicate = NSPredicate(format: "%K.@count >= %i",#keyPath(Movie.reviews), rating)
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            print(error)
+            return []
+        }
     }
 }
