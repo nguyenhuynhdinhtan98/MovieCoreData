@@ -23,9 +23,6 @@ class CoreDataManager {
                 fatalError("Failed to initialize Core Data \(error)")
             }
         }
-        
-        let directories = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        print(directories[0])
     }
     
     var viewContext: NSManagedObjectContext {

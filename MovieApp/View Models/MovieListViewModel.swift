@@ -12,7 +12,7 @@ class MovieListViewModel: ObservableObject {
     
     @Published var movies = [MovieViewModel]()
     @Published var filterEnabled: Bool = false
-    
+    @Published var sortEnabled: Bool = false 
     @Published var selectedSortOption: SortOptions = .title
     @Published var selectedSortDirection: SortDirection = .ascending
     
@@ -29,6 +29,18 @@ class MovieListViewModel: ObservableObject {
         let movies: [Movie] = Movie.getAll()
         DispatchQueue.main.async {
             self.movies = movies.map(MovieViewModel.init)
+        }
+    }
+    
+    func sort() {
+        let request: NSFetchRequest<Movie>  = Movie.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: selectedSortOption.rawValue, ascending: selectedSortDirection.value)]
+//        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true),  NSSortDescriptor(key: "rating", ascending: false)]
+        let fetchResultsController : NSFetchedResultsController<Movie> = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataManager.shared.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        try? fetchResultsController.performFetch()
+        DispatchQueue.main.async {
+            self.movies = (fetchResultsController.fetchedObjects ?? []).map(MovieViewModel.init)
         }
     }
 }

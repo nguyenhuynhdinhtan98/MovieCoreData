@@ -44,7 +44,7 @@ struct MovieListScreen: View {
                         movieListVM.getAllMovies()
                     }.padding().foregroundColor(Color(#colorLiteral(red: 0.202427417, green: 0.5955722928, blue: 0.8584871888, alpha: 1)))
                     Button("Sort") {
-                        
+                        movieListVM.sortEnabled = true
                     }.foregroundColor(Color(#colorLiteral(red: 0.202427417, green: 0.5955722928, blue: 0.8584871888, alpha: 1)))
                     Spacer()
                     VStack(spacing: 10) {
@@ -85,28 +85,31 @@ struct MovieListScreen: View {
                     UITableView.appearance().showsVerticalScrollIndicator = false
                     movieListVM.getAllMovies()
                 })
-                GeometryReader { geometry in
-                    VStack {
-                        HStack {
-                            Spacer()
-                            Picker("Select title", selection: $movieListVM.selectedSortOption) {
-                                ForEach(SortOptions.allCases, id: \.self) {
-                                    Text($0.displayText)
-                                }
-                            }.frame(width: geometry.size.width/3, height: 100)
-                                .clipped()
-                            
-                            Picker("Sort Direction", selection: $movieListVM.selectedSortDirection) {
-                                ForEach(SortDirection.allCases, id: \.self) {
-                                    Text($0.displayText)
-                                }
-                            }.frame(width: geometry.size.width/3, height: 100)
-                                .clipped()
-                            
-                            Spacer()
-                        }
-                        Button("Done") {
-                            
+                if movieListVM.sortEnabled {
+                    GeometryReader { geometry in
+                        VStack {
+                            HStack {
+                                Spacer()
+                                Picker("Select title", selection: $movieListVM.selectedSortOption) {
+                                    ForEach(SortOptions.allCases, id: \.self) {
+                                        Text($0.displayText)
+                                    }
+                                }.frame(width: geometry.size.width/3, height: 100)
+                                    .clipped()
+                                
+                                Picker("Sort Direction", selection: $movieListVM.selectedSortDirection) {
+                                    ForEach(SortDirection.allCases, id: \.self) {
+                                        Text($0.displayText)
+                                    }
+                                }.frame(width: geometry.size.width/3, height: 100)
+                                    .clipped()
+                                
+                                Spacer()
+                            }
+                            Button("Done") {
+                                movieListVM.sortEnabled = false
+                                movieListVM.sort()
+                            }
                         }
                     }
                 }
