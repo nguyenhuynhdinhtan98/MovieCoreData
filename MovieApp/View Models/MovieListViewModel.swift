@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class MovieListViewModel: ObservableObject {
+class MovieListViewModel: NSObject ,ObservableObject {
     
     @Published var movies = [MovieViewModel]()
     @Published var filterEnabled: Bool = false
@@ -16,6 +16,7 @@ class MovieListViewModel: ObservableObject {
     @Published var selectedSortOption: SortOptions = .title
     @Published var selectedSortDirection: SortDirection = .ascending
     
+    private var fetchedResultsController: NSFetchedResultsController<Movie>!
     
     func deleteMovie(movie: MovieViewModel) {
         let movie: Movie? = Movie.byID(id: movie.id)
@@ -26,9 +27,14 @@ class MovieListViewModel: ObservableObject {
     }
     
     func getAllMovies() {
-        let movies: [Movie] = Movie.getAll()
+        let request: NSFetchRequest<Movie> = Movie.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataManager.shared.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+        try? fetchedResultsController.performFetch()
+//        let movies: [Movie] = Movie.getAll()
         DispatchQueue.main.async {
-            self.movies = movies.map(MovieViewModel.init)
+            self.movies =  (self.fetchedResultsController.fetchedObjects ?? []).map(MovieViewModel.init)
         }
     }
     
@@ -39,8 +45,17 @@ class MovieListViewModel: ObservableObject {
         let fetchResultsController : NSFetchedResultsController<Movie> = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataManager.shared.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         
         try? fetchResultsController.performFetch()
+        
         DispatchQueue.main.async {
             self.movies = (fetchResultsController.fetchedObjects ?? []).map(MovieViewModel.init)
+        }
+    }
+}
+
+extension MovieListViewModel: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        DispatchQueue.main.async {
+            self.movies = (controller.fetchedObjects as? [Movie] ?? []).map(MovieViewModel.init)
         }
     }
 }

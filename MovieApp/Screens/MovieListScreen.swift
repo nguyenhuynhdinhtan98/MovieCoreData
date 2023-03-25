@@ -32,7 +32,7 @@ struct MovieListScreen: View {
             // delete the movie
             movieListVM.deleteMovie(movie: movie)
             // get all movies
-            movieListVM.getAllMovies()
+//            movieListVM.getAllMovies()
         }
     }
     
@@ -70,9 +70,9 @@ struct MovieListScreen: View {
                     activeSheet = .addMovie
                 })
                 .sheet(item: $activeSheet, onDismiss: {
-                    if !filterApplied {
-                        movieListVM.getAllMovies()
-                    }
+//                    if !filterApplied {
+//                        movieListVM.getAllMovies()
+//                    }
                 }, content: { item in
                     switch item {
                     case .addMovie:
